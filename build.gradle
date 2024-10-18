@@ -18,11 +18,26 @@ repositories {
 }
 
 dependencies {
+    // JPA
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // LOMBOK
+    annotationProcessor 'org.projectlombok:lombok'
+    // THYMELEAF
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    // WEB
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    // MYSQL
     runtimeOnly 'com.mysql:mysql-connector-j'
+    // TEST
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // LOMBOK
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    // VALIDATE
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    // JPA
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 }
 
 tasks.named('test') {
