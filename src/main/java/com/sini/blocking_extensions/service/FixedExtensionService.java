@@ -26,7 +26,6 @@ public class FixedExtensionService {
         fixedExtensionRepository.save(fixedExtension);
     }
 
-
     public List<FixedExtensionResponse> getAllFixedExtensions() {
         List<FixedExtension> fixedExtensions = fixedExtensionRepository.findAll();
 
@@ -47,4 +46,5 @@ public class FixedExtensionService {
 
         fixedExtensionRepository.delete(deleteExtension);
     }
+
 }
