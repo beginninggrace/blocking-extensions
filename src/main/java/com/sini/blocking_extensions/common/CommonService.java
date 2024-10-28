@@ -13,7 +13,7 @@ public class CommonService {
 
     private final ExtensionService extensionService;
 
-    public void findExtension(String name) {
+    public void validateNonDuplicateExtension(String name) {
         if (extensionService.isDuplicateExtension(name)) {
             throw new DuplicateExtensionException("해당 확장자는 이미 차단된 확장자입니다.");
         }
