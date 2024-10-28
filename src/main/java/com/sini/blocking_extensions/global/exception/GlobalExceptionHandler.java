@@ -1,5 +1,6 @@
 package com.sini.blocking_extensions.global.exception;
 
+import com.sini.blocking_extensions.global.exception.custom.DuplicateExtensionException;
 import com.sini.blocking_extensions.global.exception.custom.NotFoundExtensionException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NotFoundExtensionException.class)
     public ResponseEntity<ExceptionResponse> notFoundExtensionException(final NotFoundExtensionException e) {
+        log.error(e.getMessage());
+        return createResponse(HttpStatus.BAD_REQUEST, e.getMessage());
+    }
+
+    @ExceptionHandler(DuplicateExtensionException.class)
+    public ResponseEntity<ExceptionResponse> duplicateExtensionException(final DuplicateExtensionException e) {
         log.error(e.getMessage());
         return createResponse(HttpStatus.BAD_REQUEST, e.getMessage());
     }
