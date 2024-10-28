@@ -1,5 +1,6 @@
 package com.sini.blocking_extensions.service;
 
+import com.sini.blocking_extensions.common.CommonService;
 import com.sini.blocking_extensions.dto.FixedExtensionRequest;
 import com.sini.blocking_extensions.dto.FixedExtensionResponse;
 import com.sini.blocking_extensions.entity.FixedExtension;
@@ -18,10 +19,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class FixedExtensionService {
 
     private final FixedExtensionRepository fixedExtensionRepository;
+    private final CommonService commonService;
 
     @Transactional
     public void setFixedExtension(FixedExtensionRequest request) {
-        // 검증 추가해야 함
+        commonService.validateNonDuplicateExtension(request.getExtensionName());
+
         FixedExtension fixedExtension = new FixedExtension(request.getExtensionName());
         fixedExtensionRepository.save(fixedExtension);
     }
