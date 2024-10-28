@@ -7,6 +7,7 @@ import com.sini.blocking_extensions.service.FixedExtensionService;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,5 +29,10 @@ public class FixedExtensionController {
     @GetMapping
     public CommonResponse<List<FixedExtensionResponse>> getAllFixedExtensions() {
         return CommonResponse.ok(fixedExtensionService.getAllFixedExtensions());
+    }
+
+    @DeleteMapping
+    public void deleteFixedExtension(@Valid @RequestBody FixedExtensionRequest request) {
+        fixedExtensionService.deleteFixedExtension(request);
     }
 }

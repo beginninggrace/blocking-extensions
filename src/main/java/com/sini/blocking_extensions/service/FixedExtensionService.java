@@ -37,4 +37,14 @@ public class FixedExtensionService {
         return fixedExtensions.stream().map(
             fixedExtension -> new FixedExtensionResponse(fixedExtension.getExtensionName())).toList();
     }
+
+    public void deleteFixedExtension(FixedExtensionRequest request) {
+        FixedExtension deleteExtension = fixedExtensionRepository.findByExtensionName(request.getExtensionName());
+
+        if (deleteExtension == null) {
+            throw new NotFoundExtensionException("삭제할 확장자가 존재하지 않습니다.");
+        }
+
+        fixedExtensionRepository.delete(deleteExtension);
+    }
 }
