@@ -47,4 +47,15 @@ public class CustomExtensionService {
         return customExtensions.stream().map(
             customExtension -> new CustomExtensionResponse(customExtension.getCustomExtensionName())).toList();
     }
+
+    @Transactional
+    public void deleteFCustomExtension(CustomExtensionRequest request) {
+        CustomExtension deleteExtension = customExtensionRepository.findByCustomExtensionName(request.getExtensionName());
+
+        if (deleteExtension == null) {
+            throw new NotFoundExtensionException("삭제할 확장자가 존재하지 않습니다.");
+        }
+
+        customExtensionRepository.delete(deleteExtension);
+    }
 }

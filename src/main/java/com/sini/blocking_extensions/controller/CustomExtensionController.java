@@ -3,11 +3,13 @@ package com.sini.blocking_extensions.controller;
 import com.sini.blocking_extensions.common.CommonResponse;
 import com.sini.blocking_extensions.dto.CustomExtensionRequest;
 import com.sini.blocking_extensions.dto.CustomExtensionResponse;
+import com.sini.blocking_extensions.dto.FixedExtensionRequest;
 import com.sini.blocking_extensions.dto.FixedExtensionResponse;
 import com.sini.blocking_extensions.service.CustomExtensionService;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,5 +31,10 @@ public class CustomExtensionController {
     @GetMapping
     public CommonResponse<List<CustomExtensionResponse>> getAllCustomExtensions() {
         return CommonResponse.ok(customExtensionService.getAllCustomExtensions());
+    }
+
+    @DeleteMapping
+    public void deleteFixedExtension(@Valid @RequestBody CustomExtensionRequest request) {
+        customExtensionService.deleteFCustomExtension(request);
     }
 }
