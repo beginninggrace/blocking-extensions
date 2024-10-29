@@ -40,6 +40,7 @@ public class FixedExtensionService {
             fixedExtension -> new FixedExtensionResponse(fixedExtension.getExtensionName())).toList();
     }
 
+    @Transactional
     public void deleteFixedExtension(FixedExtensionRequest request) {
         FixedExtension deleteExtension = fixedExtensionRepository.findByExtensionName(request.getExtensionName());
 
