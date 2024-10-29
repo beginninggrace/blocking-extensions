@@ -3,9 +3,7 @@ package com.sini.blocking_extensions.service;
 import com.sini.blocking_extensions.common.CommonService;
 import com.sini.blocking_extensions.dto.CustomExtensionRequest;
 import com.sini.blocking_extensions.dto.CustomExtensionResponse;
-import com.sini.blocking_extensions.dto.FixedExtensionResponse;
 import com.sini.blocking_extensions.entity.CustomExtension;
-import com.sini.blocking_extensions.entity.FixedExtension;
 import com.sini.blocking_extensions.global.exception.custom.ExtensionLimitExceededException;
 import com.sini.blocking_extensions.global.exception.custom.NotFoundExtensionException;
 import com.sini.blocking_extensions.repository.CustomExtensionRepository;
@@ -49,7 +47,7 @@ public class CustomExtensionService {
     }
 
     @Transactional
-    public void deleteFCustomExtension(CustomExtensionRequest request) {
+    public void deleteCustomExtension(CustomExtensionRequest request) {
         CustomExtension deleteExtension = customExtensionRepository.findByCustomExtensionName(request.getExtensionName());
 
         if (deleteExtension == null) {

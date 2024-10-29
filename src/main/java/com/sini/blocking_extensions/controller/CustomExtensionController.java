@@ -3,8 +3,6 @@ package com.sini.blocking_extensions.controller;
 import com.sini.blocking_extensions.common.CommonResponse;
 import com.sini.blocking_extensions.dto.CustomExtensionRequest;
 import com.sini.blocking_extensions.dto.CustomExtensionResponse;
-import com.sini.blocking_extensions.dto.FixedExtensionRequest;
-import com.sini.blocking_extensions.dto.FixedExtensionResponse;
 import com.sini.blocking_extensions.service.CustomExtensionService;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -35,6 +33,6 @@ public class CustomExtensionController {
 
     @DeleteMapping
     public void deleteFixedExtension(@Valid @RequestBody CustomExtensionRequest request) {
-        customExtensionService.deleteFCustomExtension(request);
+        customExtensionService.deleteCustomExtension(request);
     }
 }
