@@ -1,4 +1,4 @@
-package com.sini.blocking_extensions.common;
+package com.sini.blocking_extensions.global.common;
 
 import com.sini.blocking_extensions.global.exception.custom.DuplicateExtensionException;
 import com.sini.blocking_extensions.service.ExtensionService;

@@ -1,4 +1,4 @@
-package com.sini.blocking_extensions.common;
+package com.sini.blocking_extensions.global.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
