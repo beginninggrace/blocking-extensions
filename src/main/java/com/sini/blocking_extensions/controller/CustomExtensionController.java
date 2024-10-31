@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/v1/custom-extension")
+@RequestMapping("/v1/custom-extensions")
 public class CustomExtensionController {
 
     private final CustomExtensionService customExtensionService;
