@@ -1,6 +1,6 @@
 package com.sini.blocking_extensions.service;
 
-import com.sini.blocking_extensions.common.CommonService;
+import com.sini.blocking_extensions.global.common.CommonService;
 import com.sini.blocking_extensions.dto.CustomExtensionRequest;
 import com.sini.blocking_extensions.dto.CustomExtensionResponse;
 import com.sini.blocking_extensions.entity.CustomExtension;

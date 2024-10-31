@@ -1,6 +1,6 @@
 package com.sini.blocking_extensions.controller;
 
-import com.sini.blocking_extensions.common.CommonResponse;
+import com.sini.blocking_extensions.global.common.CommonResponse;
 import com.sini.blocking_extensions.dto.FixedExtensionRequest;
 import com.sini.blocking_extensions.dto.FixedExtensionResponse;
 import com.sini.blocking_extensions.service.FixedExtensionService;
