@@ -6,6 +6,7 @@ import com.sini.blocking_extensions.global.exception.custom.FileSizeLimitExcepti
 import com.sini.blocking_extensions.global.exception.custom.NotFoundFileException;
 import com.sini.blocking_extensions.global.exception.custom.NotFoundExtensionException;
 import com.sini.blocking_extensions.global.exception.custom.NotMatchedExtensionNameException;
+import com.sini.blocking_extensions.global.exception.custom.NotFoundBucketException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +51,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ExceptionResponse> notMatchedExtensionNameException(final NotMatchedExtensionNameException e) {
         log.error(e.getMessage());
         return createResponse(HttpStatus.BAD_REQUEST, e.getMessage());
+    }
+
+    @ExceptionHandler(NotFoundBucketException.class)
+    public ResponseEntity<ExceptionResponse> notFoundBucketException(final NotFoundBucketException e) {
+        log.error(e.getMessage());
+        return createResponse(HttpStatus.NOT_FOUND, e.getMessage());
     }
 
     private ResponseEntity<ExceptionResponse> createResponse(
