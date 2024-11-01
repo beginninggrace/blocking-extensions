@@ -1,4 +1,4 @@
-package com.sini.blocking_extensions.service;
+package com.sini.blocking_extensions.global.common;
 
 import com.sini.blocking_extensions.repository.CustomExtensionRepository;
 import com.sini.blocking_extensions.repository.FixedExtensionRepository;

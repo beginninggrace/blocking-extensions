@@ -1,7 +1,6 @@
 package com.sini.blocking_extensions.global.common;
 
 import com.sini.blocking_extensions.global.exception.custom.BlockedExtensionException;
-import com.sini.blocking_extensions.service.ExtensionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

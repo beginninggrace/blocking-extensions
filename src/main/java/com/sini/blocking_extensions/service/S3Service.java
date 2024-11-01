@@ -6,6 +6,7 @@ import com.amazonaws.services.s3.model.AmazonS3Exception;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.sini.blocking_extensions.global.exception.custom.NotFoundBucketException;
+import com.sini.blocking_extensions.service.FileUploadService;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;

@@ -4,7 +4,6 @@ import com.sini.blocking_extensions.dto.FileCreateResponse;
 import com.sini.blocking_extensions.dto.FileReadResponse;
 import com.sini.blocking_extensions.global.common.CommonResponse;
 import com.sini.blocking_extensions.service.FileService;
-import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
