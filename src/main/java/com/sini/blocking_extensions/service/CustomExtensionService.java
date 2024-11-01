@@ -24,7 +24,7 @@ public class CustomExtensionService {
 
     @Transactional
     public void setCustomExtension(CustomExtensionRequest request) {
-        commonService.validateNonDuplicateExtension(request.getExtensionName());
+        commonService.validateBlockedExtension(request.getExtensionName());
 
         List<CustomExtension> customExtensions = customExtensionRepository.findAll();
         if(customExtensions.size() <= 200) {

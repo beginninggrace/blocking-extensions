@@ -23,7 +23,7 @@ public class FixedExtensionService {
 
     @Transactional
     public void setFixedExtension(FixedExtensionRequest request) {
-        commonService.validateNonDuplicateExtension(request.getExtensionName());
+        commonService.validateBlockedExtension(request.getExtensionName());
 
         FixedExtension fixedExtension = new FixedExtension(request.getExtensionName());
         fixedExtensionRepository.save(fixedExtension);
