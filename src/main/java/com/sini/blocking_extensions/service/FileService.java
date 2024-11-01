@@ -1,6 +1,7 @@
 package com.sini.blocking_extensions.service;
 
 import com.sini.blocking_extensions.dto.FileCreateResponse;
+import com.sini.blocking_extensions.dto.FileReadResponse;
 import com.sini.blocking_extensions.entity.File;
 import com.sini.blocking_extensions.global.common.CommonService;
 import com.sini.blocking_extensions.global.exception.custom.FileSizeLimitException;
@@ -58,6 +59,13 @@ public class FileService {
         fileRepository.delete(file);
     }
 
+    public FileReadResponse getPresignedURL(Long fileId) {
+        File file = findFileOrElseThrow(fileId);
+
+        String preSignedUrl = fileUploadService.getPresignedURL(file.getKeyName());
+        return new FileReadResponse(file.getId(), preSignedUrl);
+    }
+
     private void validateAndExtractExtension(MultipartFile file) {
         if (!file.getOriginalFilename().contains(".") || !file.getContentType().contains("/")) {
             throw new NotFoundExtensionException("확장자가 존재하지 않는 파일입니다.");
@@ -82,6 +90,12 @@ public class FileService {
         String uuid = UUID.randomUUID().toString();
         String filename = file.getOriginalFilename();
         return filename + uuid;
+    }
+
+    public File findFileOrElseThrow(Long fileId) {
+        return fileRepository.findById(fileId).orElseThrow(
+            () -> new NotFoundFileException("존재하지 않는 파일입니다.")
+        );
     }
 
 }

@@ -9,5 +9,8 @@ public interface FileUploadService {
 
     void delete(String keyName);
 
+    String getPresignedURL(String keyName);
+
+
 }
 

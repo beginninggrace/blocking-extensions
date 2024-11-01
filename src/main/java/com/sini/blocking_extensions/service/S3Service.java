@@ -48,4 +48,18 @@ public class S3Service implements FileUploadService {
             throw new NotFoundBucketException("존재하지 않는 버킷입니다.");
         }
     }
+
+    @Override
+    public String getPresignedURL(String keyName) {
+        Date expiration = new Date();
+        expiration.setTime(expiration.getTime() + 1000 * 60 * 2);
+
+        GeneratePresignedUrlRequest generatePresignedUrlRequest =
+            new GeneratePresignedUrlRequest(bucket, keyName)
+                .withMethod(HttpMethod.GET)
+                .withExpiration(expiration);
+
+        URL presignedURL = amazonS3.generatePresignedUrl(generatePresignedUrlRequest);
+        return presignedURL.toString();
+    }
 }
