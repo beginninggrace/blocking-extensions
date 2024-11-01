@@ -22,14 +22,14 @@ public class File {
     private Long id;
 
     @Column
-    private String objectName;
+    private String objectFileName; // 김시은
 
     @Column
-    private String keyName;
+    private String keyName; // 김시은jpg823049823
 
     @Column
-    private String filePath;
+    private String filePath; // s3dla4l23mf
 
     @Column
-    private String type;
+    private String type; // jpg
 }
