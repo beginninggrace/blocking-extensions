@@ -1,8 +1,11 @@
 package com.sini.blocking_extensions.global.exception;
 
-import com.sini.blocking_extensions.global.exception.custom.DuplicateExtensionException;
+import com.sini.blocking_extensions.global.exception.custom.BlockedExtensionException;
 import com.sini.blocking_extensions.global.exception.custom.ExtensionLimitExceededException;
+import com.sini.blocking_extensions.global.exception.custom.FileSizeLimitException;
+import com.sini.blocking_extensions.global.exception.custom.NotFoundFileException;
 import com.sini.blocking_extensions.global.exception.custom.NotFoundExtensionException;
+import com.sini.blocking_extensions.global.exception.custom.NotMatchedExtensionNameException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +22,32 @@ public class GlobalExceptionHandler {
         return createResponse(HttpStatus.NOT_FOUND, e.getMessage());
     }
 
-    @ExceptionHandler(DuplicateExtensionException.class)
-    public ResponseEntity<ExceptionResponse> duplicateExtensionException(final DuplicateExtensionException e) {
+    @ExceptionHandler(BlockedExtensionException.class)
+    public ResponseEntity<ExceptionResponse> blockedExtensionException(final BlockedExtensionException e) {
         log.error(e.getMessage());
         return createResponse(HttpStatus.BAD_REQUEST, e.getMessage());
     }
 
     @ExceptionHandler(ExtensionLimitExceededException.class)
     public ResponseEntity<ExceptionResponse> extensionLimitExceededException(final ExtensionLimitExceededException e) {
+        log.error(e.getMessage());
+        return createResponse(HttpStatus.BAD_REQUEST, e.getMessage());
+    }
+
+    @ExceptionHandler(FileSizeLimitException.class)
+    public ResponseEntity<ExceptionResponse> fileSizeLimitException(final FileSizeLimitException e) {
+        log.error(e.getMessage());
+        return createResponse(HttpStatus.PAYLOAD_TOO_LARGE, e.getMessage());
+    }
+
+    @ExceptionHandler(NotFoundFileException.class)
+    public ResponseEntity<ExceptionResponse> notFoundFileException(final NotFoundFileException e) {
+        log.error(e.getMessage());
+        return createResponse(HttpStatus.NOT_FOUND, e.getMessage());
+    }
+
+    @ExceptionHandler(NotMatchedExtensionNameException.class)
+    public ResponseEntity<ExceptionResponse> notMatchedExtensionNameException(final NotMatchedExtensionNameException e) {
         log.error(e.getMessage());
         return createResponse(HttpStatus.BAD_REQUEST, e.getMessage());
     }
