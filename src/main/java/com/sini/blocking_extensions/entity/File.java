@@ -21,16 +21,16 @@ public class File {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String originalFilename; // 김시은
 
-    @Column
+    @Column(nullable = false)
     private String keyName; // 김시은jpg823049823
 
-    @Column
+    @Column(nullable = false)
     private String filePath; // s3dla4l23mf
 
-    @Column
+    @Column(nullable = false)
     private String type; // jpg
 
     public File(String originalFilename, String keyName, String filePath, String fileType) {
