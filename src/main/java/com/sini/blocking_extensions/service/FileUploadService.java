@@ -7,5 +7,7 @@ public interface FileUploadService {
 
     String upload(MultipartFile auctionImage, String keyName) throws IOException;
 
+    void delete(String keyName);
+
 }
 

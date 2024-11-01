@@ -40,4 +40,12 @@ public class S3Service implements FileUploadService {
         return "https://dccg5mv6uel89.cloudfront.net/" + keyName;
     }
 
+    @Override
+    public void delete(String keyName) {
+        try {
+            amazonS3.deleteObject(bucket, keyName);
+        } catch (AmazonS3Exception e) {
+            throw new NotFoundBucketException("존재하지 않는 버킷입니다.");
+        }
+    }
 }
