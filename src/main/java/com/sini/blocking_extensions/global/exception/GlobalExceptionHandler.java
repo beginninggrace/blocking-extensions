@@ -3,6 +3,7 @@ package com.sini.blocking_extensions.global.exception;
 import com.sini.blocking_extensions.global.exception.custom.BlockedExtensionException;
 import com.sini.blocking_extensions.global.exception.custom.ExtensionLimitExceededException;
 import com.sini.blocking_extensions.global.exception.custom.FileSizeLimitException;
+import com.sini.blocking_extensions.global.exception.custom.FileUploadFailedException;
 import com.sini.blocking_extensions.global.exception.custom.NotFoundFileException;
 import com.sini.blocking_extensions.global.exception.custom.NotFoundExtensionException;
 import com.sini.blocking_extensions.global.exception.custom.NotMatchedExtensionNameException;
@@ -57,6 +58,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ExceptionResponse> notFoundBucketException(final NotFoundBucketException e) {
         log.error(e.getMessage());
         return createResponse(HttpStatus.NOT_FOUND, e.getMessage());
+    }
+
+    @ExceptionHandler(FileUploadFailedException.class)
+    public ResponseEntity<ExceptionResponse> fileUploadFailedException(final FileUploadFailedException e) {
+        log.error(e.getMessage());
+        return createResponse(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
     }
 
     private ResponseEntity<ExceptionResponse> createResponse(

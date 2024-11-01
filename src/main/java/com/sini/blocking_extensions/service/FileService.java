@@ -1,16 +1,15 @@
 package com.sini.blocking_extensions.service;
 
-import com.sini.blocking_extensions.entity.CustomExtension;
-import com.sini.blocking_extensions.entity.FixedExtension;
+import com.sini.blocking_extensions.dto.FileCreateResponse;
+import com.sini.blocking_extensions.entity.File;
 import com.sini.blocking_extensions.global.common.CommonService;
-import com.sini.blocking_extensions.global.exception.custom.BlockedExtensionException;
 import com.sini.blocking_extensions.global.exception.custom.FileSizeLimitException;
+import com.sini.blocking_extensions.global.exception.custom.FileUploadFailedException;
 import com.sini.blocking_extensions.global.exception.custom.NotFoundExtensionException;
 import com.sini.blocking_extensions.global.exception.custom.NotFoundFileException;
 import com.sini.blocking_extensions.global.exception.custom.NotMatchedExtensionNameException;
 import com.sini.blocking_extensions.repository.FileRepository;
 import java.io.IOException;
-import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,9 +23,9 @@ public class FileService {
 
     private final FileRepository fileRepository;
     private final CommonService commonService;
-//    private final FileUploadService fileUploadService;
+    private final FileUploadService fileUploadService;
 
-    public String saveFile(MultipartFile file) {
+    public FileCreateResponse saveFile(MultipartFile file) {
         float megabytes = (float) file.getSize() / 1024 / 1024;
         if (megabytes > 10) {
             throw new FileSizeLimitException("파일 용량이 초과되었습니다. 10MB 이하의 파일만 업로드 해주세요.");
@@ -37,16 +36,17 @@ public class FileService {
         }
 
         validateAndExtractExtension(file);
-        String keyName = createKeyName(file);
 
-//        try {
-//            String filePath = fileUploadService.upload(file, keyName);
-//            Long fileId = fileRepository.save(new File(objectName, keyName, filePath, user)).getId();
-//            return new FileCreateResponseDto(fileId);
-//        } catch (IOException e) {
-//            throw new IllegalArgumentException();
-//        }
-        return "완성";
+        String keyName = createKeyName(file);
+        String fileType = file.getContentType().substring(file.getContentType().lastIndexOf("/") + 1);
+
+        try {
+            String filePath = fileUploadService.upload(file, keyName);
+            Long fileId = fileRepository.save(new File(file.getOriginalFilename(), keyName, filePath, fileType)).getId();
+            return new FileCreateResponse(fileId, file.getOriginalFilename());
+        } catch (IOException e) {
+            throw new FileUploadFailedException("파일 업로드에 실패했습니다. 나중에 다시 시도해주세요.");
+        }
     }
 
     private void validateAndExtractExtension(MultipartFile file) {
@@ -71,7 +71,7 @@ public class FileService {
 
     private String createKeyName(MultipartFile file) {
         String uuid = UUID.randomUUID().toString();
-        String filename = file.getOriginalFilename(); // 공백제거 옥 장 판
+        String filename = file.getOriginalFilename();
         return filename + uuid;
     }
 

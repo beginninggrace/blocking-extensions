@@ -22,7 +22,7 @@ public class File {
     private Long id;
 
     @Column
-    private String objectFileName; // 김시은
+    private String originalFilename; // 김시은
 
     @Column
     private String keyName; // 김시은jpg823049823
@@ -32,4 +32,11 @@ public class File {
 
     @Column
     private String type; // jpg
+
+    public File(String originalFilename, String keyName, String filePath, String fileType) {
+        this.originalFilename = originalFilename;
+        this.keyName = keyName;
+        this.filePath = filePath;
+        this.type = type;
+    }
 }
