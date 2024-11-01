@@ -14,10 +14,12 @@ import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 @Slf4j(topic = "FileService")
 public class FileService {
 
@@ -25,6 +27,7 @@ public class FileService {
     private final CommonService commonService;
     private final FileUploadService fileUploadService;
 
+    @Transactional
     public FileCreateResponse saveFile(MultipartFile file) {
         float megabytes = (float) file.getSize() / 1024 / 1024;
         if (megabytes > 10) {
@@ -47,6 +50,12 @@ public class FileService {
         } catch (IOException e) {
             throw new FileUploadFailedException("파일 업로드에 실패했습니다. 나중에 다시 시도해주세요.");
         }
+    }
+
+    @Transactional
+    public void delete(File file) {
+        fileUploadService.delete(file.getKeyName());
+        fileRepository.delete(file);
     }
 
     private void validateAndExtractExtension(MultipartFile file) {
