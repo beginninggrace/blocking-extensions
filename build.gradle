@@ -20,10 +20,6 @@ repositories {
 dependencies {
     // JPA
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    // LOMBOK
-    annotationProcessor 'org.projectlombok:lombok'
-    // THYMELEAF
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     // WEB
     implementation 'org.springframework.boot:spring-boot-starter-web'
     // MYSQL
@@ -36,11 +32,15 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     // VALIDATE
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    // JPA
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     //S3
     implementation "com.amazonaws:aws-java-sdk-s3:1.12.281"
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    // SECURITY
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    // JWT
+    compileOnly group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
 }
 
 tasks.named('test') {
