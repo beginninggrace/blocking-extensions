@@ -30,4 +30,8 @@ public class Admin {
     @Column(nullable = false)
     private String password;
 
+    public Admin(Long userId, String email) {
+        this.id = userId;
+        this.email = email;
+    }
 }
